@@ -2,8 +2,8 @@
 ## Description:
 Build a system where gestures control animations on the website (e.g., moving the "Dropout Bear"), while buttons connected to the Arduino allow users to play specific songs on the website. This combines gesture-based interaction with music playback, tying into the musical and artistic themes of the Graduation album.
 
-##Arduino Responsibilities:
-###Gesture Control:
+## Arduino Responsibilities:
+### Gesture Control:
 Use an ultrasonic sensor to detect hand movement.
 Send distance data to p5.js via serial communication.
 
