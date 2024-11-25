@@ -19,3 +19,12 @@ Adjust animations (e.g., "Dropout Bear" floats up or down based on hand movement
 ### Song Playback:
 Play specific songs based on the signal received for button presses.
 Use the p5.Sound library to manage audio playback on the website.
+
+## Wiring Diagram for Arduino:
+### Ultrasonic Sensor:
+Trigger pin and Echo pin connected to digital pins.
+Power and ground connected to Arduino.
+
+### Buttons:
+Each button connected to a separate digital pin.
+Use pull-down resistors to prevent floating inputs.
