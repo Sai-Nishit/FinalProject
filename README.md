@@ -5,13 +5,13 @@ The project concept involves creating a digital art installation using **p5.js**
 This topic aligns with my interest in combining technology and creativity to enhance user engagement through interactive art. It allows for exploring the integration of hardware and software to create a multisensory experience, blending digital art with real-world interactions. This project also provides an opportunity to deepen my understanding of sensors, microcontrollers, and interactive web design.
 
 ### Inputs and Outputs
-- Inputs:
-  - Ultrasonic Sensor: Detects the proximity of the user's hand.
-  - Buttons: Serve as input triggers to change the music tracks.
+Inputs:
+Ultrasonic Sensor: Detects the proximity of the user's hand.
+Buttons: Serve as input triggers to change the music tracks.
 
-- Outputs:
-  - Visual Output: Animated changes in the digital art displayed on the website.
-  - Audio Output: Transition or switching of background music based on button presses.
+Outputs:
+Visual Output: Animated changes in the digital art displayed on the website.
+Audio Output: Transition or switching of background music based on button presses.
 
 This integration of tactile and motion-based interaction with digital elements ensures a unique and engaging user experience.
 
