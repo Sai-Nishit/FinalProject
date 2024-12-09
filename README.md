@@ -88,10 +88,13 @@ function updateWebInterface(distance) {
 ```
 
 ## System Diagram :
+![image description](https://github.com/Sai-Nishit/FinalProject/blob/main/system%20diagram.png)
 
 ## FSM Diagram :
+![image description](https://github.com/Sai-Nishit/FinalProject/blob/main/FSM.png)
 
 ## Circuit Diagram :
+![image description](https://github.com/Sai-Nishit/FinalProject/blob/main/circuit.png)
 
 ## Testing and Debugging:
 ### Prototype Testing:
