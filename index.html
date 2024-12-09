@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Arduino and p5.js Project</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js-serialport/0.2.2/p5.serialport.min.js"></script>
+  
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+    }
+    canvas {
+      display: block;
+      margin: 20px auto;
+      border: 1px solid #ccc;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    #instructions {
+      text-align: center;
+      margin: 10px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <h1>Arduino & p5.js Interactive Experience</h1>
+  <p id="instructions">Move your hand near the sensor or press buttons to see changes on this screen!</p>
+
+  <script src="sketch.js"></script>
+</body>
+</html>
