@@ -1,3 +1,115 @@
+# Milestone 3:-
+
+## Objective :
+To develop a functional prototype integrating the hardware components with interactive software, ensuring seamless communication between the Arduino and the web platform. This milestone demonstrates progress toward achieving an immersive, interactive experience by implementing key elements from previous milestones.
+
+## Key Components:
+### Hardware Integration :
+Ultrasonic sensor for real-time proximity detection.
+Joystick/buttons for character control or interaction.
+LEDs for proximity and gameplay feedback.
+
+### Software Development:
+p5.js for dynamic animations and visual feedback on the web interface.
+Arduino IDE for managing hardware logic and communication.
+Communication protocols for data exchange between Arduino and the web platform.
+
+### Pseudocode :
+The following pseudocode outlines the main functions and their interactions for the prototype:
+
+`Setup Function`
+
+```
+function setup() {
+    configurePins(); // Initialize pins for ultrasonic sensor, buttons, and LEDs
+    initializeSerialCommunication(); // Set up communication with the web platform
+    initializeJoystick(); // Prepare joystick controls
+    loadAssets(); // Load animations, sounds, and other assets for the web interface
+}
+```
+
+`Loop Function`
+
+```
+function loop() {
+    distance = readUltrasonicSensor(); // Get proximity data
+    processProximityFeedback(distance); // Update LEDs based on distance
+    handleJoystickInput(); // Control character movements using joystick
+    handleButtonPresses(); // Trigger animations or sounds based on buttons
+    updateWebInterface(distance); // Send updated data to the web platform
+}
+
+```
+### Additional Functions:- 
+
+`Proximity Detection`
+
+```
+function readUltrasonicSensor() {
+    return getDistance(); // Measure distance using ultrasonic sensor
+}
+
+```
+
+`LED Feedback`
+
+```
+function processProximityFeedback(distance) {
+    if (distance > 50) {
+        setLED(GREEN);
+    } else if (distance > 20) {
+        setLED(YELLOW);
+    } else {
+        setLED(RED);
+    }
+}
+
+```
+
+`Character Movement`
+
+```
+function handleJoystickInput() {
+    xMovement = getJoystickX();
+    yMovement = getJoystickY();
+    updateCharacterPosition(xMovement, yMovement);
+}
+
+
+```
+
+` Web Interface Updates`
+
+```
+function updateWebInterface(distance) {
+    sendDataToWeb(distance); // Send data for animations or sound changes
+}
+
+```
+
+## System Diagram :
+
+## FSM Diagram :
+
+## Circuit Diagram :
+
+## Testing and Debugging:
+### Prototype Testing:
+Verified real-time updates from the ultrasonic sensor to the web interface.
+Tested joystick movements for smooth character control.
+
+### Challenges:
+Fine-tuning proximity thresholds for LED feedback.
+Synchronizing web animations with hardware inputs.
+
+### Next Steps:
+Integrate sound effects for enhanced immersion.
+Finalize animations and refine visual effects.
+Optimize code for performance and modularity.
+
+## Relevance:
+This milestone builds upon the planning and concepts from Milestone 1 and 2. By integrating hardware and software, it showcases progress toward creating an interactive and immersive project, aligning with the objectives of the course and personal goals of combining creativity with technology.
+
 # Milestone 2:- Project Proposal, Planning, and Organizing
 This milestone, I finalized the project's structure and identified the key components needed for development. I outlined the code's organization, explaining each part in terms of its purpose and functionality. The structure is designed to ensure modularity and clarity, allowing smooth integration of hardware and web interface components.
 
