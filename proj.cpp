@@ -1,81 +1,101 @@
-// Arduino Code for Milestone 3
 
-// Pin Definitions
-const int trigPin = 9;    // Ultrasonic sensor trigger
-const int echoPin = 10;   // Ultrasonic sensor echo
-const int buttonPin1 = 2; // Button 1
-const int buttonPin2 = 3; // Button 2
-const int ledGreen = 4;   // Green LED
-const int ledYellow = 5;  // Yellow LED
-const int ledRed = 6;     // Red LED
+const int greenLED = 4;
+const int yellowLED = 3;
+const int blueLED = 5;
+const int redLED = 2;
 
-// Variables
-long duration;
-int distance;
+const int trigRight = 7, echoRight = 8; 
+const int pingTop = 11;                 
+const int buttonPin = 6;                 
 
+const float maxRange = 15.4;            
 void setup() {
-  // Initialize pins
-  pinMode(trigPin, OUTPUT);
-  pinMode(echoPin, INPUT);
-  pinMode(buttonPin1, INPUT_PULLUP);
-  pinMode(buttonPin2, INPUT_PULLUP);
-  pinMode(ledGreen, OUTPUT);
-  pinMode(ledYellow, OUTPUT);
-  pinMode(ledRed, OUTPUT);
+  Serial.begin(9600); 
+  pinMode(greenLED, OUTPUT);
+  pinMode(yellowLED, OUTPUT);
+  pinMode(blueLED, OUTPUT);
+  pinMode(redLED, OUTPUT);
 
-  // Start Serial Communication
-  Serial.begin(9600);
+
+  digitalWrite(greenLED, LOW);
+  digitalWrite(yellowLED, LOW);
+  digitalWrite(blueLED, LOW);
+  digitalWrite(redLED, LOW);
+
+  pinMode(trigRight, OUTPUT);
+  pinMode(echoRight, INPUT);
+  pinMode(pingTop, INPUT);
+  pinMode(buttonPin, INPUT_PULLUP);
 }
 
-void loop() {
-  // Read ultrasonic sensor
-  distance = readUltrasonicSensor();
 
-  // Update LED feedback
-  processProximityFeedback(distance);
-
-  // Check button inputs
-  handleButtonPresses();
-
-  // Send data to web interface
-  Serial.println(distance);
-
-  // Delay for stability
-  delay(100);
-}
-
-int readUltrasonicSensor() {
+long readHCSR04(int trigPin, int echoPin) {
   digitalWrite(trigPin, LOW);
   delayMicroseconds(2);
   digitalWrite(trigPin, HIGH);
   delayMicroseconds(10);
   digitalWrite(trigPin, LOW);
-  
-  duration = pulseIn(echoPin, HIGH);
-  return duration * 0.034 / 2; // Calculate distance in cm
+  return pulseIn(echoPin, HIGH) * 0.034 / 2; 
 }
 
-void processProximityFeedback(int distance) {
-  if (distance > 50) {
-    digitalWrite(ledGreen, HIGH);
-    digitalWrite(ledYellow, LOW);
-    digitalWrite(ledRed, LOW);
-  } else if (distance > 20) {
-    digitalWrite(ledGreen, LOW);
-    digitalWrite(ledYellow, HIGH);
-    digitalWrite(ledRed, LOW);
-  } else {
-    digitalWrite(ledGreen, LOW);
-    digitalWrite(ledYellow, LOW);
-    digitalWrite(ledRed, HIGH);
+long readParallaxPing(int signalPin) {
+  pinMode(signalPin, OUTPUT);
+  digitalWrite(signalPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(signalPin, HIGH);
+  delayMicroseconds(5);
+  digitalWrite(signalPin, LOW);
+  pinMode(signalPin, INPUT);
+  return pulseIn(signalPin, HIGH) * 0.034 / 2; 
+
+
+void processCommand(String command) {
+  command.trim(); 
+  if (command.startsWith("LED_ON")) {
+    int led = command.substring(7).toInt();
+    if (led == 4) digitalWrite(greenLED, HIGH);
+    else if (led == 3) digitalWrite(yellowLED, HIGH);
+    else if (led == 5) digitalWrite(blueLED, HIGH);
+  } else if (command.startsWith("LED_OFF")) {
+    int led = command.substring(8).toInt();
+    if (led == 4) digitalWrite(greenLED, LOW);
+    else if (led == 3) digitalWrite(yellowLED, LOW);
+    else if (led == 5) digitalWrite(blueLED, LOW);
+  } else if (command == "RED_BLINK") {
+    blinkRedLED();
   }
 }
 
-void handleButtonPresses() {
-  if (digitalRead(buttonPin1) == LOW) {
-    Serial.println("Button1_Pressed");
+
+void blinkRedLED() {
+  for (int i = 0; i < 10; i++) {
+    digitalWrite(redLED, HIGH);
+    delay(500);
+    digitalWrite(redLED, LOW);
+    delay(500);
   }
-  if (digitalRead(buttonPin2) == LOW) {
-    Serial.println("Button2_Pressed");
+}
+
+void loop() {
+  float top = readParallaxPing(pingTop);
+  float right = readHCSR04(trigRight, echoRight);
+
+  top = min(top, maxRange);
+  right = min(right, maxRange);
+
+  int buttonState = digitalRead(buttonPin);
+
+  Serial.print(top);
+  Serial.print(",");
+  Serial.print(right);
+  Serial.print(",");
+  Serial.print(buttonState);
+  Serial.println();
+
+  if (Serial.available() > 0) {
+    String command = Serial.readStringUntil('\n');
+    processCommand(command);
   }
+
+  delay(50); 
 }
