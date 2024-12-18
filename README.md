@@ -1,3 +1,97 @@
+# Milestone 4:-
+# Zombie Hunter Game - Interactive Sensor-Based Project
+
+Welcome to the Zombie Hunter Game, an interactive web-based game where you control a crosshair using ultrasonic sensors and a push button. Designed with Arduino, p5.js, and audio-visual effects, this game combines hardware and software to deliver an engaging experience.
+
+## Table of Contents
+1. Project Overview
+2. Features
+3. Hardware and Software Requirements
+4. How to Play
+5. Code Overview
+
+## Project Overview
+
+### The Zombie Hunter Game is a combination of hardware sensors and web-based visuals:
+
+Use ultrasonic sensors to move a crosshair on the screen.
+A push button records the position to "shoot."
+LEDs indicate the player's lives, and audio effects enhance the experience.
+
+### Technologies Used
+Hardware: Arduino with Ultrasonic Sensors (HC-SR04, Parallax Ping) and Push Button
+Software: p5.js (web interface), Arduino IDE
+Audio Effects: Background music, hit sound, and miss sound
+Visual Effects: Fade animations, zombie graphics, and crosshair movement
+
+## Features
+Real-time Crosshair Control:
+Move the crosshair using ultrasonic sensors (top and right wall sensors).
+
+Zombie Target System:
+A zombie target appears at a random position, and you must align the crosshair to hit it.
+
+Lives System with LEDs:
+
+3 LEDs (green, yellow, blue) represent the player's lives.
+LEDs turn off as lives are lost.
+A red LED blinks when all lives are lost.
+Audio Effects:
+
+Background music for immersion.
+Hit sound when the zombie is shot.
+Miss sound when the player fails to hit the target.
+Fade Animation: A red fade animation appears when the zombie is successfully killed.
+
+## Hardware and Software Requirements
+
+### Hardware Components
+1 x Arduino UNO/Nano/Mega
+1 x HC-SR04 Ultrasonic Sensor (Right Wall)
+1 x Parallax Ping Ultrasonic Sensor (Top Wall)
+1 x Push Button
+1 x Breadboard
+4 x LEDs:
+Green (life 3), Yellow (life 2), Blue (life 1), Red (Game Over)
+Resistors (220Ω for LEDs)
+Jumper Wires
+
+### Software tools 
+Arduino IDE
+Node.js (optional for hosting)
+p5.js Library
+Web Browser (Chrome recommended)
+
+### How to Play
+
+Objective: Align the crosshair on the zombie target and press the push button to "shoot."
+
+Game Flow:
+    Height Selection: Move your hand near the top sensor to control the crosshair's Y position.
+    Press the button to confirm the Y-coordinate.
+    Width Selection: Move your hand near the right sensor to control the X position.
+    Press the button to confirm the X-coordinate.
+Scoring:
+    If the crosshair aligns with the zombie target → "Zombie Killed" with a hit sound and red fade animation.
+    If the crosshair misses → Lose a life, and the miss sound plays.
+Lives:
+    You start with 3 lives (Green, Yellow, Blue LEDs).
+    LEDs turn off as you lose lives.
+    When all lives are lost, the red LED blinks, and the game ends.
+
+## Code Overview
+### Arduino Code
+The Arduino reads:
+    Ultrasonic sensor data for crosshair movement.
+    Push button state for confirming coordinates. It communicates this data to the p5.js sketch over serial communication.
+
+### p5.js Code
+The p5.js script:
+    Renders the background, zombie target, and crosshair.
+    Plays sound effects and updates the game state.
+    Sends commands to the Arduino for LED control.
+
+    
 # Milestone 3:-
 
 ## Objective :
